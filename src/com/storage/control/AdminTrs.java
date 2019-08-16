@@ -6,8 +6,6 @@
 package com.storage.control;
 
 import com.storage.model.Admin;
-import com.storage.model.StoreCard;
-import com.storage.model.User;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,14 +15,14 @@ import java.util.logging.Logger;
  *
  * @author erick
  */
-public final class AdminTrs extends DataBase<User> implements CRUD<User> {
+public final class AdminTrs extends DataBase<Admin> implements CRUD<Admin> {
 
     public AdminTrs() {
         super("Admin");
     }
 
     @Override
-    public void create(User newRecord) throws MyException {
+    public void create(Admin newRecord) throws MyException {
         if (listObjects.contains(newRecord)) {
             throw new MyException("The Admin you are trying to add, already exist.");
         }
@@ -33,7 +31,7 @@ public final class AdminTrs extends DataBase<User> implements CRUD<User> {
     }
 
     @Override
-    public List<User> read() {
+    public List<Admin> read() {
         try {
             readFile();
         } catch (IOException | ClassNotFoundException ex) {
@@ -43,7 +41,7 @@ public final class AdminTrs extends DataBase<User> implements CRUD<User> {
     }
 
     @Override
-    public void update(User newRecord) throws MyException {
+    public void update(Admin newRecord) throws MyException {
         if (!listObjects.contains(newRecord)) {
             throw new MyException("The Admin you are trying to update, don't exist.");
         }
@@ -52,7 +50,7 @@ public final class AdminTrs extends DataBase<User> implements CRUD<User> {
     }
 
     @Override
-    public void delete(User oldRecord) throws MyException {
+    public void delete(Admin oldRecord) throws MyException {
         if (!listObjects.remove(oldRecord)) {
             throw new MyException("The Admin you are trying to delete, don't exist.");
         }
@@ -62,7 +60,7 @@ public final class AdminTrs extends DataBase<User> implements CRUD<User> {
     @Override
     protected void tDefault() {
         try {
-            create(new Admin("CEO", "Erick", "Díaz", "admin123", "erickdp@hotmail.com", new StoreCard("0410", 100)));
+            create(new Admin("CEO", "Erick", "Díaz", "04-10", "erickdp@hotmail.com"));
         } catch (MyException ex) {
             Logger.getLogger(AdminTrs.class.getName()).log(Level.SEVERE, null, ex);
         }

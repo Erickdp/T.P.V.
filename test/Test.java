@@ -1,8 +1,6 @@
 
-import com.storage.control.ProductTrs;
-import com.storage.model.Product;
-import java.util.List;
-import java.util.Random;
+import com.storage.control.AdminTrs;
+import com.storage.control.ClientTrs;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,10 +18,8 @@ public class Test {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        ProductTrs p = new ProductTrs();
-        List<Product> ptrs = p.read();
-        System.out.println(ptrs.size());
-        int num = (int) Math.floor(Math.random() * ptrs.size());
+        AdminTrs a = new AdminTrs();
+        ClientTrs c = new ClientTrs();
     }
-    
+
 }

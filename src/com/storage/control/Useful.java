@@ -5,6 +5,8 @@
  */
 package com.storage.control;
 
+import com.storage.model.Admin;
+import com.storage.model.Client;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,10 +16,13 @@ import java.util.regex.Pattern;
  */
 public final class Useful {
 
+    public static Client clientRegistred;
+    public static Admin adminRegistred;
+
     public final static boolean checkMail(String mail) {
-        Pattern mailPattern = Pattern.compile("[A-Za-z0-9-]"); //Re
+        Pattern mailPattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"); //Re
         Matcher tmail = mailPattern.matcher(mail);
-        return tmail.matches();
+        return tmail.find();
     }
 
     public final static String idForCard() {

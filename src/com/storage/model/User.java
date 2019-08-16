@@ -18,15 +18,15 @@ public abstract class User implements Serializable {
 
     private static final Long serialVersionUID = -1L;
 
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
     private String password;
     private String email;
     private StoreCard storeCard;
 
-    public User(String firstName, String lastName, String password, String email, StoreCard storeCard) throws MyException {
+    public User(String firstName, String lastName, String password, String email) throws MyException {
         if (!Useful.checkMail(email)) {
-            throw new MyException("Please, enter a valid mail");
+            throw new MyException("Please, enter a valid mail.");
         }
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,20 +34,23 @@ public abstract class User implements Serializable {
         this.email = email;
     }
 
+    public User(String firstName, String lastName, String password, String email, StoreCard storeCard) throws MyException {
+        if (!Useful.checkMail(email)) {
+            throw new MyException("Please, enter a valid mail.");
+        }
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+        this.storeCard = storeCard;
+    }
+
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -68,8 +71,8 @@ public abstract class User implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 43 * hash + Objects.hashCode(this.email);
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.email);
         return hash;
     }
 
@@ -89,6 +92,14 @@ public abstract class User implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public StoreCard getStoreCard() {
+        return storeCard;
+    }
+
+    public void setStoreCard(StoreCard storeCard) {
+        this.storeCard = storeCard;
     }
 
 }

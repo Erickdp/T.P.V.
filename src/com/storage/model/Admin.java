@@ -18,8 +18,8 @@ public final class Admin extends User implements Serializable {
 
     private String job;
 
-    public Admin(String job, String firstName, String lastName, String password, String email, StoreCard storeCard) throws MyException {
-        super(firstName, lastName, password, email, storeCard);
+    public Admin(String job, String firstName, String lastName, String password, String email) throws MyException {
+        super(firstName, lastName, password, email);
         this.job = job;
     }
 

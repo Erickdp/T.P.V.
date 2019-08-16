@@ -5,9 +5,8 @@
  */
 package com.storage.control;
 
-import com.storage.model.Client;
 import com.storage.model.StoreCard;
-import com.storage.model.User;
+import com.storage.model.Client;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,14 +16,14 @@ import java.util.logging.Logger;
  *
  * @author erick
  */
-public final class ClientTrs extends DataBase<User> implements CRUD<User> {
+public final class ClientTrs extends DataBase<Client> implements CRUD<Client> {
 
-    public ClientTrs(String nameFile) {
+    public ClientTrs() {
         super("Client");
     }
 
     @Override
-    public void create(User newRecord) throws MyException {
+    public void create(Client newRecord) throws MyException {
         if (listObjects.contains(newRecord)) {
             throw new MyException("The Client you are trying to add, already exist.");
         }
@@ -33,7 +32,7 @@ public final class ClientTrs extends DataBase<User> implements CRUD<User> {
     }
 
     @Override
-    public List<User> read() {
+    public List<Client> read() {
         try {
             readFile();
         } catch (IOException | ClassNotFoundException ex) {
@@ -43,7 +42,7 @@ public final class ClientTrs extends DataBase<User> implements CRUD<User> {
     }
 
     @Override
-    public void update(User newRecord) throws MyException {
+    public void update(Client newRecord) throws MyException {
         if (!listObjects.contains(newRecord)) {
             throw new MyException("The Client you are trying to update, don't exist.");
         }
@@ -52,7 +51,7 @@ public final class ClientTrs extends DataBase<User> implements CRUD<User> {
     }
 
     @Override
-    public void delete(User oldRecord) throws MyException {
+    public void delete(Client oldRecord) throws MyException {
         if (!listObjects.remove(oldRecord)) {
             throw new MyException("The Client you are trying to delete, don't exist.");
         }
@@ -62,7 +61,9 @@ public final class ClientTrs extends DataBase<User> implements CRUD<User> {
     @Override
     protected void tDefault() {
         try {
-            create(new Client("Pedro", "Smith", "abc123", "pedro@hotmail.com", new StoreCard("apv", 50.50)));
+            StoreCard sc = new StoreCard("0410", 26);
+            create(new Client("1726545260", "Enrique", "Pastaz", "0410", "eediazp1@hotmail.com", sc));
+            sc.setClient(listObjects.get(0));
         } catch (MyException ex) {
             Logger.getLogger(ClientTrs.class.getName()).log(Level.SEVERE, null, ex);
         }
