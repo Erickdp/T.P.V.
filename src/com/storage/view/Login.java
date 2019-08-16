@@ -118,30 +118,27 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String mail = jTextField1.getText();
-        String pass = jTextField2.getText();
         if (jCheckBox1.isSelected()) {
             ClientTrs ctrs = new ClientTrs();
             List<Client> users = ctrs.read();
             for (Client user : users) {
-                if (user.getEmail().equals(mail) & user.getPassword().equals(pass)) {
+                if (user.getEmail().equals(jTextField1.getText()) 
+                        & user.getPassword().equals(jTextField2.getText())) {
                     Useful.clientRegistred = user;
                     new ATM().setVisible(true);
                     this.setVisible(false);
                 }
             }
-            System.out.println("No hay");
-        } else {
-            AdminTrs atrs = new AdminTrs();
-            List<Admin> users = atrs.read();
-            for (Admin user : users) {
-                if (user.getEmail().equals(mail) & user.getPassword().equals(pass)) {
-                    Useful.adminRegistred = user;
-                    new ATM().setVisible(true);
-                    this.setVisible(false);
-                }
+        }
+        AdminTrs atrs = new AdminTrs();
+        List<Admin> users = atrs.read();
+        for (Admin user : users) {
+            if (user.getEmail().equals(jTextField1.getText()) 
+                    & user.getPassword().equals(jTextField2.getText())) {
+                Useful.adminRegistred = user;
+                new ATM().setVisible(true);
+                this.setVisible(false);
             }
-            System.out.println("No hay");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
