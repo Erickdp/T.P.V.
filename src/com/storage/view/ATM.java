@@ -9,7 +9,6 @@ import com.storage.control.MyException;
 import com.storage.control.ProductTrs;
 import com.storage.control.Useful;
 import com.storage.model.Product;
-import com.storage.model.StoreCard;
 import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.List;
@@ -23,11 +22,11 @@ import rsscalelabel.RSScaleLabel;
  * @author erick
  */
 public class ATM extends javax.swing.JFrame {
-
+    
     private final ProductTrs ptrs = new ProductTrs();
     private List<Product> products = ptrs.read();
     private Set<Product> twoProducts = new HashSet<>();
-
+    
     private final void loadTable() {
         Object[] colums = {"Code", "Name Product", "Lot", "Unit Price"};
         DefaultTableModel model = new DefaultTableModel(colums, 0);
@@ -54,9 +53,8 @@ public class ATM extends javax.swing.JFrame {
      */
     public ATM() {
         initComponents();
-        setLocationRelativeTo(this);
-        RSScaleLabel.setScaleLabel(jLabel5, "stockFootage.jpg");
-        RSScaleLabel.setScaleLabel(jLabel10, "shopCard.png");
+        RSScaleLabel.setScaleLabel(jLabel5, "img\\stockFootage.jpg");
+        RSScaleLabel.setScaleLabel(jLabel10, "img\\shopCard.png");
         jButton3.setMnemonic(KeyEvent.VK_C);
     }
 
@@ -338,7 +336,7 @@ public class ATM extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (jCheckBox2.isSelected()) {
-
+            
         } else {
             JOptionPane.showMessageDialog(this, "Select the option to pay by cash.");
         }
