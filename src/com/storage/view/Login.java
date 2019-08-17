@@ -388,7 +388,7 @@ public class Login extends javax.swing.JFrame {
             List<Client> users = ctrs.read();
             for (Client user : users) {
                 if (user.getEmail().equals(jTextField1.getText())
-                        & user.getPassword().equals(jPasswordField2.getPassword())) {
+                        & user.getPassword().equals(jPasswordField2.getText())) {
                     Useful.clientRegistred = user;
                     System.out.println("encontrado");
                     new ATM().setVisible(true);
@@ -400,7 +400,7 @@ public class Login extends javax.swing.JFrame {
             List<Admin> users = atrs.read();
             for (Admin user : users) {
                 if (user.getEmail().equals(jTextField1.getText())
-                        & user.getPassword().equals(jPasswordField2.getPassword())) {
+                        & user.getPassword().equals(jPasswordField2.getText())) {
                     Useful.adminRegistred = user;
                     System.out.println("encontrado");
                     new ATM().setVisible(true);
@@ -409,7 +409,7 @@ public class Login extends javax.swing.JFrame {
             }
         }
         jLabel10.setText("Incorrect data, try again.");
-        jTextField2.setText(null);
+        jTextField1.setText(null);
         jPasswordField2.setText(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 

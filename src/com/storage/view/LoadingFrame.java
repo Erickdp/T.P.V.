@@ -128,7 +128,6 @@ public class LoadingFrame extends javax.swing.JFrame {
         } catch (Exception e) {
 
         }
-        new LoadingFrame().setVisible(false);
         l.setVisible(true);
         lf.dispose();
     }
