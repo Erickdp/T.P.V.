@@ -22,12 +22,13 @@ public final class ProductTrs extends DataBase<Product> implements CRUD<Product>
     }
 
     @Override
-    public void create(Product newRecord) throws MyException {
+    public String create(Product newRecord) throws MyException {
         if (listObjects.contains(newRecord)) {
             throw new MyException("The Product you are trying create, already exist.");
         }
         listObjects.add(newRecord);
         writeFile();
+        return null;
     }
 
     @Override
@@ -41,20 +42,22 @@ public final class ProductTrs extends DataBase<Product> implements CRUD<Product>
     }
 
     @Override
-    public void update(Product newRecord) throws MyException {
+    public String update(Product newRecord) throws MyException {
         if (!listObjects.contains(newRecord)) {
             throw new MyException("The Product you are trying to update, don't exist.");
         }
         listObjects.set(listObjects.indexOf(newRecord), newRecord);
         writeFile();
+        return null;
     }
 
     @Override
-    public void delete(Product oldRecord) throws MyException {
+    public String delete(Product oldRecord) throws MyException {
         if (!listObjects.remove(oldRecord)) {
             throw new MyException("The Product you are trying to delete, don't exist.");
         }
         writeFile();
+        return null;
     }
 
     @Override

@@ -23,12 +23,13 @@ public final class ClientTrs extends DataBase<Client> implements CRUD<Client> {
     }
 
     @Override
-    public void create(Client newRecord) throws MyException {
+    public String create(Client newRecord) throws MyException {
         if (listObjects.contains(newRecord)) {
             throw new MyException("The Client you are trying to add, already exist.");
         }
         listObjects.add(newRecord);
         writeFile();
+        return "Customer successfully added.";
     }
 
     @Override
@@ -42,20 +43,22 @@ public final class ClientTrs extends DataBase<Client> implements CRUD<Client> {
     }
 
     @Override
-    public void update(Client newRecord) throws MyException {
+    public String update(Client newRecord) throws MyException {
         if (!listObjects.contains(newRecord)) {
             throw new MyException("The Client you are trying to update, don't exist.");
         }
         listObjects.set(listObjects.indexOf(newRecord), newRecord);
         writeFile();
+        return "Updated client correctly.";
     }
 
     @Override
-    public void delete(Client oldRecord) throws MyException {
+    public String delete(Client oldRecord) throws MyException {
         if (!listObjects.remove(oldRecord)) {
             throw new MyException("The Client you are trying to delete, don't exist.");
         }
         writeFile();
+        return "Customer removed correctly.";
     }
 
     @Override

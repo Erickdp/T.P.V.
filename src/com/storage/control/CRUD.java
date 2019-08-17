@@ -14,11 +14,12 @@ import java.util.List;
 public interface CRUD<T> {
 
     /**
-     *
+     * 
      * @param newRecord
-     * @throws MyException
+     * @return
+     * @throws MyException 
      */
-    void create(T newRecord) throws MyException;
+    String create(T newRecord) throws MyException;
 
     /**
      *
@@ -27,17 +28,19 @@ public interface CRUD<T> {
     List<T> read();
 
     /**
-     *
+     * 
      * @param newRecord
-     * @throws MyException
+     * @return
+     * @throws MyException 
      */
-    void update(T newRecord) throws MyException;
+    String update(T newRecord) throws MyException;
 
     /**
-     *
+     * 
      * @param oldRecord
-     * @throws MyException
+     * @return
+     * @throws MyException 
      */
-    void delete(T oldRecord) throws MyException;
+    String delete(T oldRecord) throws MyException;
 
 }

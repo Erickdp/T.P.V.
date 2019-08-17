@@ -26,7 +26,7 @@ public class StoreCard implements Serializable {
 
     public StoreCard(String code, double cash) throws MyException {
         if (cash < 24) {
-            throw new MyException("Please, you initial deposite for Store Card must be greater than $25");
+            throw new MyException("Please, you initial deposite \nfor Store Card must be greater than $25");
         }
         this.code = code;
         this.id = Useful.idForCard();
@@ -47,7 +47,7 @@ public class StoreCard implements Serializable {
             case "RETIREMENT":
                 if ((this.cash - quantity) < 1) {
                     throw new MyException("You do not have enough money to make the transfer.\n"
-                            + "Current Balance $" + getCash() + " Needed $" + (quantity - this.cash) + " to effect the transfer.");
+                            + "Current Balance $" + getCash() + " \nNeeded $" + (quantity - this.cash) + " to effect the transfer.");
                 }
                 this.cash -= quantity;
                 return "Transfer successful.\nCurrent Balance $" + getCash();
