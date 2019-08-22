@@ -388,9 +388,8 @@ public class Login extends javax.swing.JFrame {
             List<Client> users = ctrs.read();
             for (Client user : users) {
                 if (user.getEmail().equals(jTextField1.getText())
-                        & user.getPassword().equals(jPasswordField2.getText())) {
+                        & user.getPassword().equals(new String(jPasswordField2.getPassword()))) {
                     Useful.clientRegistred = user;
-                    System.out.println("encontrado");
                     new ATM().setVisible(true);
                     this.dispose();
                 }
@@ -400,10 +399,9 @@ public class Login extends javax.swing.JFrame {
             List<Admin> users = atrs.read();
             for (Admin user : users) {
                 if (user.getEmail().equals(jTextField1.getText())
-                        & user.getPassword().equals(jPasswordField2.getText())) {
+                        & user.getPassword().equals(new String(jPasswordField2.getPassword()))) {
                     Useful.adminRegistred = user;
-                    System.out.println("encontrado");
-                    new ATM().setVisible(true);
+                    new frmAdmin().setVisible(true);
                     this.dispose();
                 }
             }

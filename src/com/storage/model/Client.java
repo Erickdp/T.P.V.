@@ -19,6 +19,17 @@ public final class Client extends User implements Serializable {
 
     private final String id;
 
+    public Client(String id, String firstName, String lastName, String password, String email) throws MyException {
+        super(firstName, lastName, password, email);
+        if (id.matches("[0-9]")) {
+            throw new MyException("Your ID must be numbers.");
+        }
+        if (id.length() != 10) {
+            throw new MyException("Your ID must be 10 digits.");
+        }
+        this.id = id;
+    }
+
     public Client(String id, String firstName, String lastName, String password, String email, StoreCard storeCard) throws MyException {
         super(firstName, lastName, password, email, storeCard);
         if (id.matches("[0-9]")) {

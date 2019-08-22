@@ -22,6 +22,15 @@ public final class ClientTrs extends DataBase<Client> implements CRUD<Client> {
         super("Client");
     }
 
+    public Client searchClientByID(String id) throws MyException {
+        for (Client listObject : listObjects) {
+            if (listObject.getId().equals(id)) {
+                return listObject;
+            }
+        }
+        throw new MyException("The ID don't exist.");
+    }
+
     @Override
     public String create(Client newRecord) throws MyException {
         if (listObjects.contains(newRecord)) {
@@ -64,9 +73,8 @@ public final class ClientTrs extends DataBase<Client> implements CRUD<Client> {
     @Override
     protected void tDefault() {
         try {
-            StoreCard sc = new StoreCard("0410", 26);
-            create(new Client("1726545260", "Enrique", "Pastaz", "0410", "eediazp1@hotmail.com", sc));
-            sc.setClient(listObjects.get(0));
+            create(new Client("1726545260", "Enrique", "Pastaz", "0410", "eediazp1@hotmail.com", new StoreCard("0410", 26)));
+            create(new Client("1111111111", "Pedro", "Capó", "1111", "pedro@hotmail.com"));
         } catch (MyException ex) {
             Logger.getLogger(ClientTrs.class.getName()).log(Level.SEVERE, null, ex);
         }

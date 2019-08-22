@@ -22,7 +22,6 @@ public class StoreCard implements Serializable {
     private final String id;
     private double cash;
     private final LocalDate expirationDate, openingDate;
-    private User client;
 
     public StoreCard(String code, double cash) throws MyException {
         if (cash < 24) {
@@ -96,20 +95,6 @@ public class StoreCard implements Serializable {
      */
     public LocalDate getOpeningDate() {
         return openingDate;
-    }
-
-    /**
-     * @return the client
-     */
-    public User getClient() {
-        return client;
-    }
-
-    /**
-     * @param client the client to set
-     */
-    public void setClient(User client) {
-        this.client = client;
     }
 
 }
