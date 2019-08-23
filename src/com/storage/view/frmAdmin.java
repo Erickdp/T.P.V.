@@ -131,13 +131,13 @@ public class frmAdmin extends javax.swing.JFrame {
         rSButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/storage/view/icon/minus.png"))); // NOI18N
         rSButton1.setToolTipText("");
         rSButton1.setColorHover(new java.awt.Color(25, 51, 77));
-        jPanel3.add(rSButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 0, 30, 25));
+        jPanel3.add(rSButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 0, 30, 30));
 
         rSButton2.setBackground(new java.awt.Color(187, 187, 187));
         rSButton2.setForeground(new java.awt.Color(187, 187, 187));
         rSButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/storage/view/icon/exit.png"))); // NOI18N
         rSButton2.setColorHover(new java.awt.Color(25, 51, 77));
-        jPanel3.add(rSButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 30, 25));
+        jPanel3.add(rSButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 30, 30));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -170,7 +170,7 @@ public class frmAdmin extends javax.swing.JFrame {
 
         rSButtonRiple3.setBackground(new java.awt.Color(187, 187, 187));
         rSButtonRiple3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/storage/view/icon/client.png"))); // NOI18N
-        rSButtonRiple3.setText("Clients");
+        rSButtonRiple3.setText("Client");
         rSButtonRiple3.setColorHover(new java.awt.Color(37, 77, 116));
         rSButtonRiple3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         rSButtonRiple3.setIconTextGap(38);
@@ -210,7 +210,7 @@ public class frmAdmin extends javax.swing.JFrame {
 
         rSButtonRiple6.setBackground(new java.awt.Color(187, 187, 187));
         rSButtonRiple6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/storage/view/icon/card.png"))); // NOI18N
-        rSButtonRiple6.setText("Cards Shop");
+        rSButtonRiple6.setText("Shop Card");
         rSButtonRiple6.setColorHover(new java.awt.Color(37, 77, 116));
         rSButtonRiple6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         rSButtonRiple6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -230,11 +230,16 @@ public class frmAdmin extends javax.swing.JFrame {
 
         rSButtonRiple7.setBackground(new java.awt.Color(187, 187, 187));
         rSButtonRiple7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/storage/view/icon/product.png"))); // NOI18N
-        rSButtonRiple7.setText("Products");
+        rSButtonRiple7.setText("Product");
         rSButtonRiple7.setColorHover(new java.awt.Color(37, 77, 116));
         rSButtonRiple7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         rSButtonRiple7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         rSButtonRiple7.setIconTextGap(38);
+        rSButtonRiple7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonRiple7ActionPerformed(evt);
+            }
+        });
         jPanel4.add(rSButtonRiple7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 210, -1));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 210, 500));
@@ -308,6 +313,11 @@ public class frmAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         rSButtonRiple5.setIcon(new ImageIcon("img\\out2.png"));
     }//GEN-LAST:event_rSButtonRiple5MouseExited
+
+    private void rSButtonRiple7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple7ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_rSButtonRiple7ActionPerformed
 
     /**
      * @param args the command line arguments

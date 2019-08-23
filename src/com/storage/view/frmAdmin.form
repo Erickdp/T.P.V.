@@ -111,7 +111,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="840" y="0" width="30" height="25"/>
+                  <AbsoluteConstraints x="840" y="0" width="30" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -132,7 +132,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="870" y="0" width="30" height="25"/>
+                  <AbsoluteConstraints x="870" y="0" width="30" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -223,7 +223,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/storage/view/icon/client.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Clients"/>
+                <Property name="text" type="java.lang.String" value="Client"/>
                 <Property name="colorHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="74" green="4d" red="25" type="rgb"/>
                 </Property>
@@ -292,7 +292,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/storage/view/icon/card.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Cards Shop"/>
+                <Property name="text" type="java.lang.String" value="Shop Card"/>
                 <Property name="colorHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="74" green="4d" red="25" type="rgb"/>
                 </Property>
@@ -336,7 +336,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/storage/view/icon/product.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Products"/>
+                <Property name="text" type="java.lang.String" value="Product"/>
                 <Property name="colorHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="74" green="4d" red="25" type="rgb"/>
                 </Property>
@@ -344,6 +344,9 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
                 <Property name="iconTextGap" type="int" value="38"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonRiple7ActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="0" y="340" width="210" height="-1"/>

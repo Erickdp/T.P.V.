@@ -22,24 +22,24 @@ import rsscalelabel.RSScaleLabel;
  * @author erick
  */
 public class ATM extends javax.swing.JFrame {
-    
+
     private final ProductTrs ptrs = new ProductTrs();
     private List<Product> products = ptrs.read();
     private Set<Product> twoProducts = new HashSet<>();
-    
+
     private final void loadTable() {
         Object[] colums = {"Code", "Name Product", "Lot", "Unit Price"};
         DefaultTableModel model = new DefaultTableModel(colums, 0);
         double priceT = 0d;
         Product tProduct = products.get((int) Math.floor(Math.random() * products.size()));
         if (!twoProducts.add(tProduct)) {
-            tProduct.setStock(tProduct.getStock() + 1);
+            tProduct.setUnits(tProduct.getUnits() + 1);
         }
         for (Product nowProduct : twoProducts) {
-            priceT += nowProduct.getPrice() * nowProduct.getStock();
+            priceT += nowProduct.getPrice() * nowProduct.getUnits();
             String code = nowProduct.getCode();
             String nameP = nowProduct.getNameProduct();
-            int lot = nowProduct.getStock();
+            int lot = nowProduct.getUnits();
             double price = nowProduct.getPrice();
             Object[] row = {code, nameP, lot, price};
             model.addRow(row);
@@ -309,7 +309,7 @@ public class ATM extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         for (Product prt : twoProducts) {
-            prt.setStock(1);
+            prt.setUnits(1);
         }
         twoProducts.clear();
         Object[] colums = {"Code", "Name Product", "Lot", "Unit Price"};
@@ -336,7 +336,7 @@ public class ATM extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (jCheckBox2.isSelected()) {
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "Select the option to pay by cash.");
         }

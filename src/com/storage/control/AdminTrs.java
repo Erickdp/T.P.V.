@@ -21,6 +21,15 @@ public final class AdminTrs extends DataBase<Admin> implements CRUD<Admin> {
         super("Admin");
     }
 
+    public Admin searchAdminByEmail(String email) throws MyException {
+        for (Admin l : listObjects) {
+            if (l.getEmail().equals(email)) {
+                return l;
+            }
+        }
+        throw new MyException("The E-mail don't exist.");
+    }
+
     @Override
     public String create(Admin newRecord) throws MyException {
         if (listObjects.contains(newRecord)) {

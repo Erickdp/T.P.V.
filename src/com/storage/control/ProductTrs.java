@@ -21,6 +21,15 @@ public final class ProductTrs extends DataBase<Product> implements CRUD<Product>
         super("Product");
     }
 
+    public Product searchProductByCode(String code) throws MyException {
+        for (Product p : listObjects) {
+            if (p.getCode().equals(code)) {
+                return p;
+            }
+        }
+        throw new MyException("The code, don't exist");
+    }
+
     @Override
     public String create(Product newRecord) throws MyException {
         if (listObjects.contains(newRecord)) {
@@ -66,7 +75,9 @@ public final class ProductTrs extends DataBase<Product> implements CRUD<Product>
             create(new Product("Atún", 1.50));
             create(new Product("Arroz", 15.30));
             create(new Product("Queso", 1.00));
-            create(new Product("Pincho", 3.25));
+            create(new Product("Doritos", 1.75));
+            create(new Product("Yogurt", 5.25));
+            create(new Product("Jabón", 1.5));
         } catch (MyException ex) {
             Logger.getLogger(ProductTrs.class.getName()).log(Level.SEVERE, null, ex);
         }

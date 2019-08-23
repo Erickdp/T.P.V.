@@ -21,7 +21,8 @@ public final class Product implements Serializable {
     private String code;
     private String nameProduct;
     private double price;
-    private int stock = 1;
+    private boolean stock;
+    private int units = 1;
 
     public Product(String nameProduct, double price) throws MyException {
         if (price <= 0) {
@@ -30,6 +31,23 @@ public final class Product implements Serializable {
         this.code = Useful.idForProduct();
         this.nameProduct = nameProduct;
         this.price = price;
+        stock = true;
+    }
+
+    public int getUnits() {
+        return units;
+    }
+
+    public void setUnits(int units) {
+        this.units = units;
+    }
+
+    public boolean isStock() {
+        return stock;
+    }
+
+    public void setStock(boolean stock) {
+        this.stock = stock;
     }
 
     public double getPrice() {
@@ -38,14 +56,6 @@ public final class Product implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
     }
 
     public String getNameProduct() {
