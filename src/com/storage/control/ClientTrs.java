@@ -74,7 +74,6 @@ public final class ClientTrs extends DataBase<Client> implements CRUD<Client> {
     protected void tDefault() {
         try {
             create(new Client("1726545260", "Enrique", "Pastaz", "0410", "eediazp1@hotmail.com", new StoreCard("0410", 100)));
-            create(new Client("1111111111", "Pedro", "Capó", "1111", "pedro@hotmail.com"));
         } catch (MyException ex) {
             Logger.getLogger(ClientTrs.class.getName()).log(Level.SEVERE, null, ex);
         }

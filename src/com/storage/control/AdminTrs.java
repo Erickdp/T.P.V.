@@ -72,7 +72,7 @@ public final class AdminTrs extends DataBase<Admin> implements CRUD<Admin> {
     @Override
     protected void tDefault() {
         try {
-            create(new Admin("CEO", "Erick", "Díaz", "0410", "erickdp@hotmail.com"));
+            create(new Admin("CEO", "Erick", "Díaz", "admin", "erickdp@hotmail.com"));
         } catch (MyException ex) {
             Logger.getLogger(AdminTrs.class.getName()).log(Level.SEVERE, null, ex);
         }

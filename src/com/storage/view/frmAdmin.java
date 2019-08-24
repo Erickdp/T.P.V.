@@ -14,9 +14,9 @@ import javax.swing.ImageIcon;
  * @author Erick Díaz
  */
 public class frmAdmin extends javax.swing.JFrame {
-
+    
     private AnimationClass ac = new AnimationClass();
-
+    
     private void sliderShow() {
         new Thread(new Runnable() {
             @Override
@@ -54,10 +54,10 @@ public class frmAdmin extends javax.swing.JFrame {
                 } catch (Exception e) {
                 }
             }
-
+            
         }).start();
     }
-
+    
     private void loadImg() {
         rsscalelabel.RSScaleLabel.setScaleLabel(jLabel3, "img\\super.jpg");
         rsscalelabel.RSScaleLabel.setScaleLabel(jLabel4, "img\\super2.jpg");
@@ -137,6 +137,11 @@ public class frmAdmin extends javax.swing.JFrame {
         rSButton2.setForeground(new java.awt.Color(187, 187, 187));
         rSButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/storage/view/icon/exit.png"))); // NOI18N
         rSButton2.setColorHover(new java.awt.Color(25, 51, 77));
+        rSButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButton2ActionPerformed(evt);
+            }
+        });
         jPanel3.add(rSButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 30, 30));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -296,12 +301,14 @@ public class frmAdmin extends javax.swing.JFrame {
 
     private void rSButtonRiple6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple6ActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        new frmCard().setVisible(true);
     }//GEN-LAST:event_rSButtonRiple6ActionPerformed
 
     private void rSButtonRiple2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple2ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        
+        new frmAdminA().setVisible(true);
     }//GEN-LAST:event_rSButtonRiple2ActionPerformed
 
     private void rSButtonRiple5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSButtonRiple5MouseEntered
@@ -317,7 +324,13 @@ public class frmAdmin extends javax.swing.JFrame {
     private void rSButtonRiple7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple7ActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        new frmProducts().setVisible(true);
     }//GEN-LAST:event_rSButtonRiple7ActionPerformed
+
+    private void rSButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButton2ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_rSButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
