@@ -21,5 +21,5 @@ Terminal Punto de Venta - Proyecto final de semestre.
   las ya mencionadas operaciones CRUD, por tanto para agregar administradores/gerentes/responsables del sistema se lo realiza desde 
   su propio aparatado.
   - Admin por default: 1. email -> erickdp@hotmail.com
-                           2. pass  -> admin
+                        2. pass  -> admin
   - Tener en cuenta que tanto el email como el pass pueden ser editados y/o cambiados si el administrador lo desea.
