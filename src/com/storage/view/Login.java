@@ -436,7 +436,7 @@ public class Login extends javax.swing.JFrame {
                 if (user.getEmail().equals(jTextField1.getText())
                         & user.getPassword().equals(new String(jPasswordField2.getPassword()))) {
                     Useful.clientRegistred = user;
-                    new ATM().setVisible(true);
+                    new ATMM().setVisible(true);
                     this.dispose();
                 }
             }

@@ -78,6 +78,11 @@ public final class ProductTrs extends DataBase<Product> implements CRUD<Product>
             create(new Product("Doritos", 1.75));
             create(new Product("Yogurt", 5.25));
             create(new Product("Jabón", 1.5));
+            create(new Product("Helado", 5.55));
+            create(new Product("Shampoo", 10));
+            create(new Product("Cuaderno", 1.5));
+            create(new Product("Pizza", 15.75));
+            create(new Product("Galletas", 4.25));
         } catch (MyException ex) {
             Logger.getLogger(ProductTrs.class.getName()).log(Level.SEVERE, null, ex);
         }

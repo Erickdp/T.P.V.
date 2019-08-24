@@ -5,17 +5,16 @@
  */
 package com.storage.view;
 
+import com.storage.control.ClientTrs;
 import com.storage.control.MyException;
 import com.storage.control.ProductTrs;
+import com.storage.control.Useful;
 import com.storage.model.Product;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,36 +27,30 @@ public class ATMM extends javax.swing.JFrame {
     private final ProductTrs ptrs = new ProductTrs();
     private final List<Product> products = ptrs.read();
     private Set<Product> twoProducts = new HashSet<>();
+    private ClientTrs ctrs = new ClientTrs();
 
-    private void loadTable() {
+    private void loadTable(Product ofthem) {
         Object[] columns = {"Code", "Name Product", "Price", "Lot"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
-        double price = 0d;
-        int index = (int) Math.floor(Math.random() * products.size());
-        if (!twoProducts.add(products.get(index))) {
-            products.get(index).setUnits(products.get(index).getUnits() + 1);
+        double price = 0;
+        if (!(ofthem instanceof Product)) {
+            int index = (int) Math.floor(Math.random() * products.size());
+            if (!twoProducts.add(products.get(index))) {
+                products.get(index).setUnits(products.get(index).getUnits() + 1);
+            }
+        } else {
+            if (!twoProducts.add(ofthem)) {
+                ofthem.setUnits(ofthem.getUnits() + 1);
+            }
         }
         for (Product p : twoProducts) {
-            price += p.getPrice();
-            Object[] rows = {p.getCode(), p.getNameProduct(), p.getPrice()
-                    , p.getUnits()};
+            price += (p.getPrice() * p.getUnits());
+            Object[] rows = {p.getCode(), p.getNameProduct(), p.getPrice(),
+                p.getUnits()};
             model.addRow(rows);
-            }
-        this.jTextField3.setText("$" + price);
+        }
+        this.jTextField3.setText(String.valueOf(price));
         this.rSTableMetro1.setModel(model);
-        }
-
-    private void keyPressed() {
-        KeyEvent evt = new KeyEvent(this, WIDTH, WIDTH, ICONIFIED, ERROR, 0)
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            try {
-                twoProducts.add(ptrs.searchProductByCode(jTextField1.getText()));
-            } catch (MyException ex) {
-                new ErrorMessage(new Frame(), true, true, ex.getMessage()).setVisible(true);
-            }
-        } else if(evt.getKeyCode() == KeyEvent.VK_F9) {
-            System.exit(0);
-        }
     }
 
     /**
@@ -68,6 +61,8 @@ public class ATMM extends javax.swing.JFrame {
         setLocationRelativeTo(this);
         rsscalelabel.RSScaleLabel.setScaleLabel(jLabel2, "img\\stockFootage.jpg");
         rsscalelabel.RSScaleLabel.setScaleLabel(jLabel1, "img\\shopCard.png");
+        jTextField1.setFocusable(true);
+        jLabel7.setText("Welcome Back " + Useful.clientRegistred.getFirstName());
     }
 
     /**
@@ -84,6 +79,7 @@ public class ATMM extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         rSButton1 = new rojeru_san.RSButton();
         rSButton2 = new rojeru_san.RSButton();
+        jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         rSTableMetro1 = new rojerusan.RSTableMetro();
         jLabel2 = new javax.swing.JLabel();
@@ -99,15 +95,21 @@ public class ATMM extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jTextField4 = new javax.swing.JTextField();
+        rSButtonRiple1 = new rojeru_san.RSButtonRiple();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AMT");
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1110, 615));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
+            }
+        });
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 300, 150));
 
         jPanel2.setBackground(new java.awt.Color(25, 51, 77));
@@ -123,6 +125,11 @@ public class ATMM extends javax.swing.JFrame {
                 rSButton1MouseExited(evt);
             }
         });
+        rSButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButton1ActionPerformed(evt);
+            }
+        });
 
         rSButton2.setBackground(new java.awt.Color(25, 51, 77));
         rSButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/storage/view/icon/minus.png"))); // NOI18N
@@ -135,13 +142,23 @@ public class ATMM extends javax.swing.JFrame {
                 rSButton2MouseExited(evt);
             }
         });
+        rSButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("jLabel7");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 1044, Short.MAX_VALUE)
+                .addContainerGap(438, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(268, 268, 268)
                 .addComponent(rSButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -151,8 +168,10 @@ public class ATMM extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(rSButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(rSButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rSButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -160,20 +179,34 @@ public class ATMM extends javax.swing.JFrame {
 
         rSTableMetro1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Code", "Name Product", "Price", "Lot"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        rSTableMetro1.setColorBackgoundHead(new java.awt.Color(25, 51, 77));
+        rSTableMetro1.setColorFilasForeground1(new java.awt.Color(51, 51, 51));
+        rSTableMetro1.setColorFilasForeground2(new java.awt.Color(51, 51, 51));
+        rSTableMetro1.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(rSTableMetro1);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 610, 360));
 
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel2MouseEntered(evt);
+            }
+        });
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 440, 480, 150));
 
         jLabel3.setText("Code:");
@@ -181,7 +214,7 @@ public class ATMM extends javax.swing.JFrame {
 
         jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("Press CTR to add product.");
+        jTextField1.setText("Press ENTER to add product.");
         jTextField1.setBorder(null);
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -191,11 +224,16 @@ public class ATMM extends javax.swing.JFrame {
                 jTextField1FocusLost(evt);
             }
         });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, 170, 20));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 520, 170, 10));
 
         jLabel4.setText("Paying:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, -1, -1));
 
         jTextField2.setBackground(new java.awt.Color(255, 255, 255));
         jTextField2.setForeground(new java.awt.Color(102, 102, 102));
@@ -209,30 +247,51 @@ public class ATMM extends javax.swing.JFrame {
                 jTextField2FocusLost(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 170, -1));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 170, -1));
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField2KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 170, -1));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 170, -1));
 
         jTextField3.setEditable(false);
         jTextField3.setBackground(new java.awt.Color(255, 255, 255));
         jTextField3.setForeground(new java.awt.Color(102, 102, 102));
         jTextField3.setBorder(null);
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 170, -1));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 170, -1));
+        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 170, -1));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 170, -1));
 
         jLabel5.setText("Total:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
 
         jLabel6.setText("Change:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, -1, -1));
-        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 170, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, -1, -1));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 170, -1));
 
         jTextField4.setEditable(false);
         jTextField4.setBackground(new java.awt.Color(255, 255, 255));
         jTextField4.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField4.setText("CTR + ENTER to calculate.");
+        jTextField4.setText("CTR + C to calculate.");
         jTextField4.setToolTipText("");
         jTextField4.setBorder(null);
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 170, -1));
+        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, 170, -1));
+
+        rSButtonRiple1.setBackground(new java.awt.Color(25, 51, 77));
+        rSButtonRiple1.setBorder(null);
+        rSButtonRiple1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/storage/view/icon/mon.png"))); // NOI18N
+        rSButtonRiple1.setText("Top up card ");
+        rSButtonRiple1.setColorHover(new java.awt.Color(33, 51, 61));
+        rSButtonRiple1.setIconTextGap(10);
+        rSButtonRiple1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonRiple1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rSButtonRiple1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,7 +301,7 @@ public class ATMM extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
         );
 
         pack();
@@ -278,7 +337,7 @@ public class ATMM extends javax.swing.JFrame {
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
         // TODO add your handling code here:
         if (jTextField1.getText().isEmpty()) {
-            jTextField1.setText("Press CTR to add product.");
+            jTextField1.setText("Press ENTER to add product.");
         }
     }//GEN-LAST:event_jTextField1FocusLost
 
@@ -296,40 +355,75 @@ public class ATMM extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextField2FocusLost
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ATMM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ATMM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ATMM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ATMM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        // TODO add your handling code here:
+        if (Character.isLetter(evt.getKeyChar())) {
+            getToolkit().beep();
+            evt.consume();
         }
-        //</editor-fold>
+    }//GEN-LAST:event_jTextField2KeyTyped
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ATMM().setVisible(true);
+    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
+        // TODO add your handling code here:
+        loadTable(null);
+    }//GEN-LAST:event_jLabel2MouseEntered
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                loadTable(ptrs.searchProductByCode(jTextField1.getText()));
+            } catch (MyException ex) {
+                new ErrorMessage(new Frame(), true, true, ex.getMessage()).setVisible(true);
             }
-        });
-    }
+        }
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_CONTROL) {
+            if (!jTextField2.getText().isEmpty()
+                    & Double.parseDouble(jTextField2.getText()) >= Double.parseDouble(jTextField3.getText())) {
+                jTextField4.setText(String.valueOf(Double.parseDouble(jTextField2.getText())
+                        - Double.parseDouble(jTextField3.getText())));
+            } else {
+                new ErrorMessage(new Frame(), true, true, "You can not give change. (Exact or Missing)").setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_jTextField2KeyPressed
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+        // TODO add your handling code here:
+        if (!jTextField3.getText().isEmpty()) {
+            try {
+                Useful.clientRegistred.getStoreCard().transfer(Double.parseDouble(jTextField3.getText()), "RETIREMENT");
+                ctrs.read();
+                ctrs.update(Useful.clientRegistred);
+                this.setVisible(false);
+                this.dispose();
+                new frmBill(twoProducts, Double.parseDouble(jTextField3.getText())).setVisible(true);
+            } catch (MyException ex) {
+                new ErrorMessage(new Frame(), true, true, ex.getMessage()).setVisible(true);
+            }
+        } else {
+            new ErrorMessage(new Frame(), true, true, "You must enter products").setVisible(true);
+        }
+    }//GEN-LAST:event_jLabel1MouseExited
+
+    private void rSButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButton1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_rSButton1ActionPerformed
+
+    private void rSButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButton2ActionPerformed
+        // TODO add your handling code here:
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_rSButton2ActionPerformed
+
+    private void rSButtonRiple1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple1ActionPerformed
+        // TODO add your handling code here:
+        new frmDeposit(new Frame(), true).setVisible(true);
+    }//GEN-LAST:event_rSButtonRiple1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -338,6 +432,7 @@ public class ATMM extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -346,11 +441,12 @@ public class ATMM extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    javax.swing.JTextField jTextField2;
+    javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private rojeru_san.RSButton rSButton1;
     private rojeru_san.RSButton rSButton2;
+    private rojeru_san.RSButtonRiple rSButtonRiple1;
     private rojerusan.RSTableMetro rSTableMetro1;
     // End of variables declaration//GEN-END:variables
 }
